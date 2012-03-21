@@ -15,7 +15,6 @@ depends=('libao' 'ffmpeg' 'libmodplug' 'audiofile' 'libshout' 'libmad' 'curl' 'f
          'sqlite3' 'libmms' 'wavpack' 'libmpcdec' 'avahi' 'libid3tag')
 makedepends=('pkgconfig' 'doxygen')
 install=${pkgname}.install
-changelog=ChangeLog
 source=("http://downloads.sourceforge.net/musicpd/$pkgname-$pkgver.tar.bz2"
 'mpd') 
 md5sums=('3d0e7c36646e80386b32966bd4268e8d'
