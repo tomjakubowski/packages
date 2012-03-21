@@ -8,8 +8,7 @@ pkgver=34799
 pkgrel=1
 arch=('i686' 'x86_64')
 makedepends=('libxxf86dga' 'libxxf86vm' 'libmad' 'cdparanoia' 'libxinerama' 'sdl' 'lame' 'libtheora' 'xvidcore' 'libmng' 'libxss' 'libgl' 'smbclient'
-'aalib' 'jack' 'libcaca' 'x264' 'faac' 'faad2' 'lirc-utils'  'libxvmc' 'enca' 'libvdpau' 'opencore-amr' 'libdca' 'a52dec' 'schroedinger' 'libvpx'
-'libpulse' 'fribidi' 'unzip' 'mesa' 'live-media' 'yasm' 'git' 'fontconfig' 'mpg123' 'ladspa' 'libass' 'libbluray' 'libcdio')
+'aalib' 'libcaca' 'x264' 'faac' 'faad2' 'lirc-utils'  'libxvmc' 'enca' 'libvdpau' 'opencore-amr' 'libdca' 'a52dec' 'schroedinger' 'libvpx' 'fribidi' 'unzip' 'mesa' 'live-media' 'yasm' 'git' 'fontconfig' 'mpg123' 'ladspa' 'libass' 'libbluray' 'libcdio')
 license=('GPL')
 url="http://www.mplayerhq.hu/"
 options=(!buildflags !emptydirs)
@@ -26,6 +25,8 @@ build() {
 
     ./configure --prefix=/usr \
         --enable-runtime-cpudetection \
+        --disable-pulse \
+        --disable-jack \
         --disable-gui \
         --disable-arts \
         --disable-liblzo \
@@ -52,7 +53,7 @@ package_mplayer() {
     install=mplayer.install
     backup=('etc/mplayer/codecs.conf' 'etc/mplayer/input.conf')
     depends=('desktop-file-utils' 'ttf-dejavu' 'enca' 'libxss' 'a52dec' 'libvpx' 'lirc-utils' 'x264' 'libmng' 'libdca' 'aalib' 'lame' 'fontconfig'  'libgl'
-    'libxinerama' 'libvdpau' 'libpulse' 'smbclient' 'xvidcore' 'opencore-amr' 'jack' 'cdparanoia' 'libmad' 'sdl' 'libtheora' 'libcaca' 'libxxf86dga' 'fribidi'
+    'libxinerama' 'libvdpau' 'smbclient' 'xvidcore' 'opencore-amr' 'cdparanoia' 'libmad' 'sdl' 'libtheora' 'libcaca' 'libxxf86dga' 'fribidi'
     'libjpeg' 'faac' 'faad2' 'libxvmc' 'schroedinger' 'mpg123' 'libass' 'libxxf86vm' 'libbluray' 'libcdio')
 
     cd "$srcdir/$pkgbase"
