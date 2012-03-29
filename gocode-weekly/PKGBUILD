@@ -4,12 +4,12 @@
 _realver=weekly.2012-03-13
 pkgname=gocode-weekly
 pkgver=20120313
-pkgrel=1
+pkgrel=2
 pkgdesc="An autocompletion/refactoring daemon for the Go programming language"
 arch=(i686 x86_64)
 url="https://github.com/nsf/gocode"
 license=('GPL')
-depends=('go')
+depends=('go-weekly-hg')
 makedepends=('git')
 optdepends=('auto-complete: emacs autocompletion')
 options=(!strip)
