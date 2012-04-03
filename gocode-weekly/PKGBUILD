@@ -1,7 +1,7 @@
 # Maintainer: Daniel Micay <danielmicay@gmail.com>
 # Contributor: Dave Reisner <d@falconindy.com>
 
-_realver=weekly.2012-03-13
+_tagname=go.weekly.2012-03-13
 pkgname=gocode-weekly
 pkgver=20120313
 pkgrel=2
@@ -37,7 +37,7 @@ build() {
   cd "$srcdir/src"
   git clone "$srcdir/$__gitname" "$srcdir/src/$__gitname"
   cd "$srcdir/src/$__gitname"
-  git checkout go.$_realver
+  git checkout $_tagname
 
   GOPATH=$srcdir go install
 }
