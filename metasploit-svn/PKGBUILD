@@ -18,7 +18,7 @@ provides=('metasploit')
 conflicts=('metasploit')
 options=('!strip')
 
-optdepends=('java-runtime: msfgui' 'postgresql: database support')
+optdepends=('java-runtime: msfgui' 'ruby-pg: database support')
 if $_msfupdate; then
   optdepends+=('subversion: msfupdate')
 fi
