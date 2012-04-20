@@ -61,7 +61,7 @@ build() {
   svn export cling llvm-build/tools/cling
 
   cd llvm-build
-
+  cat tools/cling/patches/*.diff | patch -p0
   ./configure --prefix=/usr --enable-optimized --enable-targets=host
   make
 }
