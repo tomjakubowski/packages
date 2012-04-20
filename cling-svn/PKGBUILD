@@ -59,7 +59,7 @@ build() {
 
   cd llvm-build
 
-  ./configure --enable-optimized --enable-targets=host
+  ./configure --enable-optimized --disable-assertions --enable-targets=host
   make
 }
 
