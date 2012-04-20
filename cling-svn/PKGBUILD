@@ -62,7 +62,7 @@ build() {
 
   cd llvm-build
 
-  ./configure --enable-optimized --enable-targets=host
+  ./configure --prefix=/usr --enable-optimized --enable-targets=host
   make
 }
 
