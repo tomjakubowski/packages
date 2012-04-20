@@ -1,6 +1,6 @@
 # Maintainer: Daniel Micay <danielmicay@gmail.com>
 pkgname=cling-svn
-pkgver=43858
+pkgver=43860
 pkgrel=1
 pkgdesc="Interactive C++ interpreter and JIT compiler"
 arch=('i686' 'x86_64')
@@ -19,6 +19,9 @@ _llvmrepo=http://llvm.org/svn/llvm-project
 
 build() {
   cd "$srcdir"
+
+  # compiling with clang doesn't work at the moment
+  export CXX=g++
 
   # cling
   if [[ -d "$_svnmod/.svn" ]]; then
