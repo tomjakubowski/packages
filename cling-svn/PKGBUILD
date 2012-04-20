@@ -20,7 +20,13 @@ _llvm_repo=http://llvm.org/svn/llvm-project
 build() {
   cd "$srcdir"
 
-  rev=155160
+  if [[ -d "$_svnmod/.svn" ]]; then
+    (cd "$_svnmod" && svn up -r "$pkgver")
+  else
+    svn co "$_svntrunk" --config-dir ./ -r "$pkgver" "$_svnmod"
+  fi
+
+  local rev=$(cat $_svnmod/LastKnownGoodLLVMSVNRevision.txt)
 
   svn co $_llvm_repo/llvm/trunk llvm -r $rev
 
