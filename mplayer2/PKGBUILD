@@ -37,10 +37,12 @@ build() {
                 --disable-mga \
                 --disable-pulse \
                 --disable-jack \
+                --disable-ossaudio \
                 --disable-gl \
                 --disable-dga2 \
                 --disable-dga1 \
                 --disable-sdl \
+                --disable-v4l2 \
                 --language=all \
                 --enable-translation \
                 --confdir=/etc/mplayer
