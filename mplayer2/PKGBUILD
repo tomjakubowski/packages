@@ -26,7 +26,7 @@ build() {
     cd "${srcdir}"/$pkgname-$pkgver
 
     ./configure --prefix=/usr \
-                --enable-runtime-cpudetection \
+                --disable-runtime-cpudetection \
                 --disable-bluray \
                 --disable-arts \
                 --disable-speex \
