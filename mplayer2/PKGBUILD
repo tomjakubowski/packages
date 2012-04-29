@@ -13,7 +13,7 @@ install=$pkgname.install
 depends=('a52dec' 'aalib' 'cdparanoia' 'desktop-file-utils' 'enca' 'faad2' 'ffmpeg' 'fontconfig'
          'freetype2' 'ladspa' 'lame' 'libass' 'libcaca' 'libcdio' 'libdca' 'libdvdcss'
          'libdvdnav' 'libdvdread' 'libgl' 'libjpeg' 'libmad' 'libtheora' 'libvdpau'
-         'libxinerama' 'libxss' 'libxv' 'libxxf86dga' 'libxxf86vm' 'lirc-utils' 'mpg123' 'ncurses' 'ttf-dejavu')
+         'libxinerama' 'libxss' 'libxv' 'libxxf86dga' 'libxxf86vm' 'lirc-utils' 'mpg123' 'ncurses')
 makedepends=('mesa' 'unzip' 'yasm')
 backup=('etc/mplayer/codecs.conf' 'etc/mplayer/input.conf')
 provides=('mplayer')
