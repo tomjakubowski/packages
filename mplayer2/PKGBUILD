@@ -56,7 +56,6 @@ package() {
     make DESTDIR="${pkgdir}" install
     install -Dm644 etc/{codecs.conf,input.conf,example.conf} "${pkgdir}"/etc/mplayer/
     install -dm755 "${pkgdir}"/usr/share/mplayer/
-    ln -s /usr/share/fonts/TTF/DejaVuSans.ttf "${pkgdir}"/usr/share/mplayer/subfont.ttf
 
     install -dm755 "${pkgdir}"/usr/share/applications/
     install -m 644 etc/mplayer.desktop "${pkgdir}"/usr/share/applications/
