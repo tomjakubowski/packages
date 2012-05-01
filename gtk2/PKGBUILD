@@ -8,7 +8,7 @@ pkgrel=3
 arch=('i686' 'x86_64')
 url="http://www.gtk.org/"
 makedepends=('atk' 'pango' 'libxcursor' 'libxinerama' 'libxrandr' 'libxi' 'libxcomposite' 'libxdamage'
-             'shared-mime-info' 'cairo' 'libcups' 'gdk-pixbuf2' 'gobject-introspection')
+             'shared-mime-info' 'cairo' 'gdk-pixbuf2' 'gobject-introspection')
 options=('!libtool')
 license=('LGPL')
 source=(http://ftp.gnome.org/pub/gnome/sources/gtk+/2.24/gtk+-$pkgver.tar.xz
@@ -23,7 +23,8 @@ build() {
     CXX=/bin/false ./configure --prefix=/usr \
         --sysconfdir=/etc \
         --localstatedir=/var \
-        --with-xinput=yes
+        --with-xinput=yes \
+        --disable-cups
 
     # https://bugzilla.gnome.org/show_bug.cgi?id=655517
     sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
@@ -34,7 +35,7 @@ build() {
 package_gtk2() {
     pkgdesc="GTK+ is a multi-platform toolkit (v2)"
     install=gtk2.install
-    depends=('atk' 'pango' 'libxcursor' 'libxinerama' 'libxrandr' 'libxi' 'libxcomposite' 'libxdamage' 'shared-mime-info' 'cairo' 'libcups' 'gtk-update-icon-cache')
+    depends=('atk' 'pango' 'libxcursor' 'libxinerama' 'libxrandr' 'libxi' 'libxcomposite' 'libxdamage' 'shared-mime-info' 'cairo' 'gtk-update-icon-cache')
     backup=(etc/gtk-2.0/gtkrc)
     replaces=('gtk2-docs')
 
