@@ -39,7 +39,7 @@ build() {
   cd "$srcdir/src/$__gitname"
   git checkout $_tagname
 
-  GOPATH=$srcdir go install
+  GOPATH=$srcdir go build
 }
 
 package() {
