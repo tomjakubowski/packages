@@ -35,7 +35,6 @@ build() {
 
   rm -rf "$srcdir/src"
   mkdir -p "$srcdir/src"
-  cd "$srcdir/src"
   git clone "$srcdir/$__gitname" "$srcdir/src/$__gitname"
   cd "$srcdir/src/$__gitname"
   git checkout $_tagname
