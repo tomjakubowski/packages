@@ -1,18 +1,18 @@
 # Maintainer: Daniel Micay <danielmicay@gmail.com>
-pkgname=term-git
+pkgname=termite-git
 pkgver=20120522
 pkgrel=1
 pkgdesc="A simple VTE-based terminal"
 arch=('i686' 'x86_64')
-url="https://github.com/thestinger/term/"
+url="https://github.com/thestinger/termite/"
 license=('GPL')
 depends=('vte')
 makedepends=('git')
-provides=(term)
-conflicts=(term)
+provides=(termite)
+conflicts=(termite)
 
-_gitroot=https://thestinger@github.com/thestinger/term.git
-_gitname=term
+_gitroot=https://thestinger@github.com/thestinger/termite
+_gitname=termite
 
 build() {
   cd "$srcdir"
