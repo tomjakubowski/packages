@@ -4,7 +4,7 @@
 
 pkgname=mplayer2
 pkgver=20120517
-pkgrel=1
+pkgrel=4
 pkgdesc="An advanced general-purpose media player. A fork of the original MPlayer project"
 arch=('i686' 'x86_64')
 license=('GPL')
@@ -13,7 +13,7 @@ install=$pkgname.install
 depends=('a52dec' 'aalib' 'cdparanoia' 'desktop-file-utils' 'enca' 'faad2' 'ffmpeg' 'fontconfig'
          'freetype2' 'ladspa' 'lame' 'libass' 'libcaca' 'libcdio' 'libdca' 'libdvdcss'
          'libdvdnav' 'libdvdread' 'libjpeg' 'libmad' 'libtheora' 'libvdpau'
-         'libxinerama' 'libxss' 'libxv' 'libxxf86vm' 'mpg123' 'ncurses')
+         'libxinerama' 'libxss' 'libxv' 'libxxf86vm' 'mpg123' 'ncurses' 'ttf-dejavu')
 makedepends=('mesa' 'unzip' 'yasm')
 backup=('etc/mplayer/codecs.conf' 'etc/mplayer/input.conf')
 provides=('mplayer')
@@ -25,8 +25,11 @@ md5sums=('814cc9545937e13796df1d4747c3c5d0')
 build() {
     cd "${srcdir}"/$pkgname-$pkgver
 
-    ./configure --prefix=/usr \
+    sed 's/gmplayer/mplayer/g' -i etc/mplayer.desktop
+    ./configure --prefix=/usr --confdir=/etc/mplayer \
+                --enable-translation --language=all \
                 --disable-runtime-cpudetection \
+                --disable-joystick \
                 --disable-lirc \
                 --disable-lircc \
                 --disable-bluray \
@@ -43,10 +46,7 @@ build() {
                 --disable-dga1 \
                 --disable-sdl \
                 --disable-v4l2 \
-                --disable-dvb \
-                --language=all \
-                --enable-translation \
-                --confdir=/etc/mplayer
+                --disable-dvb
     make
 }
 
@@ -56,6 +56,7 @@ package() {
     make DESTDIR="${pkgdir}" install
     install -Dm644 etc/{codecs.conf,input.conf,example.conf} "${pkgdir}"/etc/mplayer/
     install -dm755 "${pkgdir}"/usr/share/mplayer/
+    ln -s /usr/share/fonts/TTF/DejaVuSans.ttf "${pkgdir}"/usr/share/mplayer/subfont.ttf
 
     install -dm755 "${pkgdir}"/usr/share/applications/
     install -m 644 etc/mplayer.desktop "${pkgdir}"/usr/share/applications/
