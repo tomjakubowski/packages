@@ -1,6 +1,6 @@
 # Maintainer: Daniel Micay <danielmicay@gmail.com>
 pkgname=cling-svn
-pkgver=44774
+pkgver=45121
 pkgrel=1
 pkgdesc="Interactive C++ interpreter and JIT compiler"
 arch=('i686' 'x86_64')
