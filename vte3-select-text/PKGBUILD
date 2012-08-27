@@ -14,7 +14,7 @@ url="http://www.gnome.org"
 source=(http://ftp.gnome.org/pub/GNOME/sources/vte/${pkgver%.*}/vte-$pkgver.tar.xz
         expose_select_text.patch)
 sha256sums=('d69ec071f7a380d8b8b981b35a9a0b891f37c4b6b17d08407f66ac98d619486a'
-            '2fe15a0fc3c76c672695f89d635690ef30831069cfb837406c819e9357032567')
+            'b9e54831fec1c5852173592fd82bcd27b605b1c09ec827f2c4603404ea63a094')
 provides=(vte3)
 conflicts=(vte3)
 
