@@ -19,7 +19,7 @@ provides=(vte3)
 conflicts=(vte3)
 
 build() {
-  patch -p0 -i ../expose_select_text.patch
+  patch -p0 -i expose_select_text.patch
   cd "vte-$pkgver"
   ./configure --prefix=/usr --sysconfdir=/etc \
       --libexecdir=/usr/lib/vte \
