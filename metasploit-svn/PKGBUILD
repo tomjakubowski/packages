@@ -6,7 +6,7 @@
 _msfupdate=false
 
 pkgname=metasploit-svn
-pkgver=15466
+pkgver=15986
 pkgrel=1
 pkgdesc="The Metasploit Framework is a development platform for creating security tools and exploits."
 arch=('any')
