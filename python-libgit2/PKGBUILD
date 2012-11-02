@@ -1,7 +1,7 @@
 # Maintainer: Daniel Micay <danielmicay@gmail.com>
 
 pkgname=python-libgit2
-pkgver=20121101
+pkgver=0.17.3
 pkgrel=1
 pkgdesc='Python bindings for libgit2 (pygit2)'
 url="https://github.com/libgit2/pygit2"
@@ -10,33 +10,33 @@ makedepends=('git')
 arch=('any')
 license=('GPL2')
 
-_gitroot='https://github.com/libgit2/pygit2.git'
-_gitname='pygit2'
+__gitroot='https://github.com/libgit2/pygit2.git'
+__gitname='pygit2'
 
 build() {
   cd "$srcdir"
   msg "Connecting to GIT server...."
 
-  if [ -d $_gitname ] ; then
-    cd $_gitname && git pull origin
+  if [ -d $__gitname ] ; then
+    cd $__gitname && git pull origin
     msg "The local files are updated."
   else
-    git clone $_gitroot
+    git clone $__gitroot
   fi
 
   msg "GIT checkout done or server timeout"
   msg "Starting make..."
 
-  rm -rf "$srcdir/$_gitname-build"
-  git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
-  cd "$srcdir/$_gitname-build"
+  rm -rf "$srcdir/$__gitname-build"
+  git clone "$srcdir/$__gitname" "$srcdir/$__gitname-build"
+  cd "$srcdir/$__gitname-build"
 
-  git checkout v0.17.3
+  git checkout v$pkgver
 
   python setup.py build
 }
 
 package() {
-  cd "$srcdir/$_gitname-build"
+  cd "$srcdir/$__gitname-build"
   python setup.py install --root=${pkgdir} --optimize=1
 }
