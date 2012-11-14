@@ -46,7 +46,13 @@ package() {
   install -Dm644 "$srcdir/license.html" \
     usr/share/licenses/$pkgname/license.html
   install -Dm644 "$srcdir/adb.service" usr/lib/systemd/system/adb.service
-  [[ $CARCH = "i686" ]] && rm -rf opt/$pkgname/tools/lib/{monitor-,}x86_64
+
+  if [[ $CARCH = i686 ]]; then
+    rm -rf ${pkgdir}/opt/android-sdk/tools/lib/{monitor-,}x86_64 \
+      ${pkgdir}/opt/android-sdk/tools/lib/lib64* \
+      ${pkgdir}/opt/android-sdk/tools/emulator64-*
+  fi
+
   # Fix broken permissions
   chmod -R o=g opt/$pkgname
 }
