@@ -1,7 +1,7 @@
 # Maintainer: Daniel Micay <danielmicay@gmail.com>
 pkgname=android-ndk
 pkgver=r8c
-pkgrel=1
+pkgrel=2
 pkgdesc="Android C/C++ developer kit"
 arch=(i686 x86_64)
 url="http://developer.android.com/sdk/ndk/index.html"
@@ -20,6 +20,4 @@ package() {
   install -Dm755 "$srcdir/android-ndk.sh" etc/profile.d/android-ndk.sh
   mkdir opt
   cp -a "$srcdir/$pkgname-$pkgver" opt/android-ndk
-  # Fix broken permissions
-  chmod -R o=g opt/$pkgname
 }
