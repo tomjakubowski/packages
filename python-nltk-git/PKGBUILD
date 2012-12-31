@@ -2,19 +2,19 @@
 # Contributor: Thomas Dziedzic < gostrc at gmail >
 # Contributor: Chris Baker <baker.chris.3@gmail.com>
 
-pkgname=python2-nltk-git
-pkgver=20120311
+pkgname=python-nltk-git
+pkgver=20121231
 pkgrel=1
 pkgdesc='Software for natural language processing'
 arch=('any')
 url='http://www.nltk.org/'
 license=('APACHE')
-depends=('python2-yaml')
+depends=('python-yaml')
 optdepends=('nltk-data: test data'
-            'python2-numpy: used for calculations'
-            'python2-matplotlib: used for plotting')
-provides=('python2-nltk')
-conflicts=('python2-nltk')
+            'python-numpy: used for calculations'
+            'python-matplotlib: used for plotting')
+provides=('python-nltk')
+conflicts=('python-nltk')
 
 _gitroot="https://github.com/nltk/nltk.git"
 _gitname="nltk"
@@ -27,7 +27,7 @@ build() {
     cd "$_gitname" && git pull origin
     msg "The local files are updated."
   else
-    git clone "$_gitroot" "$_gitname"
+    git clone "$_gitroot" "$_gitname" -b 2and3
   fi
 
   msg "GIT checkout done or server timeout"
@@ -37,11 +37,11 @@ build() {
   git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
   cd "$srcdir/$_gitname-build"
 
-  python2 setup.py build
+  python setup.py build
 }
 
 package() {
   cd "$srcdir/$_gitname-build"
 
-  python2 setup.py install --root=${pkgdir} --optimize=1
+  python setup.py install --root=${pkgdir} --optimize=1
 }
