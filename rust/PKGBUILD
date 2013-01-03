@@ -18,10 +18,12 @@ sha256sums=('d326d22707f0562d669c11efbc33ae812ddbf76ab78f07087fc5beb095a8928a')
 build() {
   cd rust-${pkgver}
 
- ./configure --prefix=${pkgdir}/usr --disable-docs
+  sed -i 1s/python/python2/ src/etc/*.py
 
-  msg 's/python$/python2/'
-  find . -executable -exec grep -qe 'env python$' '{}' ';' -exec sed -i 's/env python$/env python2/' '{}' ';' -print
+  ./configure --prefix=${pkgdir}/usr --disable-docs
+
+  # avoid python makedepend (force fallback to python2)
+  sed -i 's/^PYTHONVERSION.*/PYTHONVERSION := 3/' src/llvm/Makefile.rules
 
   make || make
 }
