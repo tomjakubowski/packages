@@ -25,7 +25,7 @@ build() {
   # avoid python makedepend (force fallback to python2)
   sed -i 's/^PYTHONVERSION.*/PYTHONVERSION := 3/' src/llvm/Makefile.rules
 
-  make || make
+  make
 }
 
 package() {
