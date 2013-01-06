@@ -14,18 +14,14 @@ options=('!libtool')
 backup=(etc/gtk-3.0/settings.ini)
 license=('LGPL')
 source=(http://ftp.gnome.org/pub/gnome/sources/gtk+/${pkgver%.*}/gtk+-$pkgver.tar.xz
-        settings.ini wacom.patch focus.patch)
+        settings.ini focus.patch)
 provides=(gtk3)
 conflicts=(gtk3)
 sha256sums=('aaccf2e1576338acf37816290578e8f19888935f381665b3847076be25fe513c'
             'c214d3dcdcadda3d642112287524ab3e526ad592b70895c9f3e3733c23701621'
-            '86bda95a14a99d0f596c4ecb2ed715689f71c207c65dfc90a39d4ae7f1c0c0f5'
             '02309da1859bc697f7942f803034c0c9773010a1b7aed32e5ee5260c0d73316a')
 build() {
     cd "gtk+-$pkgver"
-
-    # Partially revert BGO#673440 in order to fix BGO#674157
-    patch -Np1 -i ../wacom.patch
 
     # https://bugzilla.gnome.org/show_bug.cgi?id=677329
     patch -Np1 -i ../focus.patch
@@ -35,8 +31,10 @@ build() {
         --localstatedir=/var \
         --enable-gtk2-dependency \
         --disable-schemas-compile
+
     #https://bugzilla.gnome.org/show_bug.cgi?id=655517
     sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
+
     make
 }
 
