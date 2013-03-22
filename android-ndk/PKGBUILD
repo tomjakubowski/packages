@@ -1,6 +1,6 @@
 # Maintainer: Daniel Micay <danielmicay@gmail.com>
 pkgname=android-ndk
-pkgver=r8d
+pkgver=r8e
 pkgrel=1
 pkgdesc="Android C/C++ developer kit"
 arch=(i686 x86_64)
