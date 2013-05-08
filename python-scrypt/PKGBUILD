@@ -10,7 +10,7 @@ license=('BSD')
 depends=('python')
 makedepends=()
 options=(!emptydirs)
-source=("http://pypi.python.org/packages/source/s/scrypt/scrypt-$pkgver.tar.gz")
+source=("https://pypi.python.org/packages/source/s/scrypt/scrypt-$pkgver.tar.gz")
 md5sums=('e8d0406d633b87c6809cb4a9994a6c32')
 
 package_python-scrypt() {
