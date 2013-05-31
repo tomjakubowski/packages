@@ -1,0 +1,69 @@
+# Maintainer: Daniel Micay <danielmicay@gmail.com>
+_gitname=rust
+pkgname=rust-incoming-git
+pkgver=release.0.6.705.g9d966ae
+pkgrel=1
+arch=('i686' 'x86_64')
+pkgdesc='A safe, concurrent, practical language'
+url='http://www.rust-lang.org/'
+license=('MIT' 'Apache')
+depends=(gcc shared-mime-info)
+makedepends=(libffi perl python2 curl chrpath emacs git)
+optdepends=('haskell-pandoc: documentation generator (rustdoc)')
+source=('git://github.com/mozilla/rust.git#branch=incoming')
+md5sums=(SKIP)
+install=rust.install
+provides=(rust)
+conflicts=(rust)
+
+pkgver() {
+  cd $_gitname
+  git describe | sed s/-/./g
+}
+
+build() {
+  cd rust
+
+  ./configure --prefix=/usr --disable-docs
+
+  # avoid python makedepend (force fallback to python2)
+  sed -i 's/^PYTHONVERSION.*/PYTHONVERSION := 3/' src/llvm/Makefile.rules
+
+  make
+}
+
+check() {
+  cd rust
+  make check
+}
+
+package() {
+  cd rust
+  make DESTDIR="$pkgdir" install
+
+  mkdir -p "$pkgdir/usr/share/vim" "$pkgdir/usr/share/licenses/$pkgname"
+
+  cp -a src/etc/vim "$pkgdir/usr/share/vim/vimfiles"
+  find "$pkgdir/usr/share/vim" -type f -exec chmod 644 {} +
+  find "$pkgdir/usr/share/vim" -type d -exec chmod 755 {} +
+
+  install -Dm644 src/etc/zsh/_rust "$pkgdir/usr/share/zsh/site-functions/_rust"
+  install -Dm644 src/etc/kate/rust.xml "$pkgdir/usr/share/apps/katepart/syntax/rust.xml"
+  install -Dm644 src/etc/gedit/share/mime/packages/rust.xml \
+    "$pkgdir/usr/share/mime/packages/rust.xml"
+  install -Dm644 src/etc/gedit/share/gtksourceview-3.0/language-specs/rust.lang \
+    "$pkgdir/usr/share/gtksourceview-3.0/language-specs/rust.lang"
+
+  install -m644 LICENSE-APACHE "$pkgdir/usr/share/licenses/$pkgname"
+  install -m644 LICENSE-MIT "$pkgdir/usr/share/licenses/$pkgname"
+
+  cd src/etc/emacs
+  make
+  mkdir -p "$pkgdir/usr/share/emacs/site-lisp/"
+  install -Dm644 cm-mode.el{,c} rust-mode.el{,c} "$pkgdir/usr/share/emacs/site-lisp/"
+
+  cd "$pkgdir/usr"
+
+  # https://github.com/mozilla/rust/issues/5219
+  chrpath -d bin/* lib/*.so lib/rustc/*/lib/*.so
+}
