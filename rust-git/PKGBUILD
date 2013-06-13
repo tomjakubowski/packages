@@ -1,6 +1,6 @@
 # Maintainer: Daniel Micay <danielmicay@gmail.com>
 _gitname=rust
-pkgname=rust-incoming-git
+pkgname=rust-git
 pkgver=release.0.6.705.g9d966ae
 pkgrel=1
 arch=('i686' 'x86_64')
@@ -10,11 +10,12 @@ license=('MIT' 'Apache')
 depends=(gcc shared-mime-info)
 makedepends=(libffi perl python2 curl chrpath emacs git)
 optdepends=('haskell-pandoc: documentation generator (rustdoc)')
-source=('git://github.com/mozilla/rust.git#branch=incoming')
+source=('git://github.com/mozilla/rust.git')
 md5sums=(SKIP)
-install=rust.install
-provides=(rust)
-conflicts=(rust)
+install=${pkgname}.install
+provides=(rust rust-incoming-git)
+conflicts=(rust rust-incoming-git)
+replaces=(rust-incoming-git)
 
 pkgver() {
   cd $_gitname
@@ -32,10 +33,10 @@ build() {
   make
 }
 
-check() {
-  cd rust
-  make check
-}
+#check() {
+  #cd rust
+  #make check
+#}
 
 package() {
   cd rust
