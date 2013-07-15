@@ -4,7 +4,7 @@
 
 _gitname=libgit2
 pkgname=libgit2-git
-pkgver=5032.c61300e
+pkgver=5038.4ae2905
 epoch=1
 pkgrel=1
 pkgdesc='A linkable library for Git'
