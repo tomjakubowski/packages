@@ -1,7 +1,7 @@
 # Maintainer: Daniel Micay <danielmicay@gmail.com>
 _gitname=rust
 pkgname=rust-git
-pkgver=release.0.6.705.g9d966ae
+pkgver=0.7.847.g330378d
 pkgrel=1
 arch=('i686' 'x86_64')
 pkgdesc='A safe, concurrent, practical language'
@@ -67,4 +67,7 @@ package() {
 
   # https://github.com/mozilla/rust/issues/5219
   chrpath -d bin/* lib/*.so lib/rustc/*/lib/*.so
+
+  cd lib/rustc/x86_64-unknown-linux-gnu/lib/
+  ln -sf ../../../librustllvm.so .
 }
