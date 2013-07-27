@@ -8,7 +8,7 @@ pkgdesc='A safe, concurrent, practical language'
 url='http://www.rust-lang.org/'
 license=('MIT' 'Apache')
 depends=(gcc shared-mime-info)
-makedepends=(libffi perl python2 curl chrpath emacs-nox git)
+makedepends=(libffi perl python2 curl chrpath git)
 optdepends=('haskell-pandoc: documentation generator (rustdoc)')
 source=('git://github.com/mozilla/rust.git')
 md5sums=(SKIP)
@@ -59,9 +59,7 @@ package() {
   install -m644 LICENSE-MIT "$pkgdir/usr/share/licenses/$pkgname"
 
   cd src/etc/emacs
-  make
-  mkdir -p "$pkgdir/usr/share/emacs/site-lisp/"
-  install -Dm644 cm-mode.el{,c} rust-mode.el{,c} "$pkgdir/usr/share/emacs/site-lisp/"
+  install -Dm644 rust-mode.el "$pkgdir/usr/share/emacs/site-lisp/rust-mode.el"
 
   cd "$pkgdir/usr"
 
