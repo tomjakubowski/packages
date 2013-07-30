@@ -66,6 +66,6 @@ package() {
   # https://github.com/mozilla/rust/issues/5219
   chrpath -d bin/* lib/*.so lib/rustc/*/lib/*.so
 
-  cd lib/rustc/$CARCH-unknown-linux-gnu/lib/
-  ln -sf ../../../librustllvm.so .
+  cd lib
+  ln -sf rustc/$CARCH-unknown-linux-gnu/lib/* .
 }
