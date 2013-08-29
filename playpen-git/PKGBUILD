@@ -1,7 +1,7 @@
 # Maintainer: Daniel Micay <danielmicay@gmail.com>
 _gitname=playpen
 pkgname=playpen-git
-pkgver=1.1.g23dc1e0
+pkgver=1.8.g684d7e4
 pkgver() { cd $_gitname && git describe | sed 's/^v//; s/-/./g'; }
 pkgrel=1
 epoch=1
