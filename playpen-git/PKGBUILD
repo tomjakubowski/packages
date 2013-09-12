@@ -18,7 +18,6 @@ md5sums=(SKIP)
 
 build() {
   cd $_gitname
-  git submodule update --init
   make
 }
 
