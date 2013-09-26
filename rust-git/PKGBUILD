@@ -9,7 +9,6 @@ url='http://www.rust-lang.org/'
 license=('MIT' 'Apache')
 depends=(gcc shared-mime-info)
 makedepends=(libffi perl python2 curl chrpath git)
-optdepends=('haskell-pandoc: documentation generator (rustdoc)')
 source=('git://github.com/mozilla/rust.git')
 md5sums=(SKIP)
 install=${pkgname}.install
