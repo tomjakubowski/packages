@@ -1,7 +1,7 @@
 # Maintainer: Daniel Micay <danielmicay@gmail.com>
 _gitname=rust
 pkgname=rust-git
-pkgver=0.7.847.g330378d
+pkgver=0.8.624.gfd2c012
 pkgrel=1
 arch=('i686' 'x86_64')
 pkgdesc='A safe, concurrent, practical language'
@@ -15,6 +15,7 @@ install=${pkgname}.install
 provides=(rust rust-incoming-git)
 conflicts=(rust rust-incoming-git)
 replaces=(rust-incoming-git)
+options=(staticlibs)
 
 pkgver() {
   cd $_gitname
