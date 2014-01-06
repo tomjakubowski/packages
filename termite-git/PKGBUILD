@@ -1,7 +1,7 @@
 # Maintainer: Daniel Micay <danielmicay@gmail.com>
 _gitname=termite
 pkgname=termite-git
-pkgver=7.17.gc1d65c4
+pkgver=7.22.g40e825d
 pkgver() { cd $_gitname && git describe | sed 's/^v//; s/-/./g'; }
 pkgrel=1
 epoch=1
