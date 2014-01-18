@@ -12,9 +12,8 @@ makedepends=(libffi perl python2 curl chrpath git)
 source=('git://github.com/mozilla/rust.git')
 md5sums=(SKIP)
 install=${pkgname}.install
-provides=(rust rust-incoming-git)
-conflicts=(rust rust-incoming-git)
-replaces=(rust-incoming-git)
+provides=(rust)
+conflicts=(rust)
 options=(staticlibs)
 
 pkgver() {
