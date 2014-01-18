@@ -63,8 +63,8 @@ package() {
   cd "$pkgdir/usr"
 
   # https://github.com/mozilla/rust/issues/5219
-  chrpath -d bin/* lib/*.so lib/rustc/*/lib/*.so
+  chrpath -d bin/* lib/*.so lib/rustlib/*/lib/*.so
 
   cd lib
-  ln -sf rustc/$CARCH-unknown-linux-gnu/lib/* .
+  ln -sf rustlib/$CARCH-unknown-linux-gnu/lib/* .
 }
