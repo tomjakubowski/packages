@@ -1,14 +1,14 @@
 # Maintainer: Daniel Micay <danielmicay@gmail.com>
 _gitname=rust
 pkgname=rust-git
-pkgver=0.8.624.gfd2c012
+pkgver=0.9.434.gde57a22
 pkgrel=1
 arch=('i686' 'x86_64')
 pkgdesc='A safe, concurrent, practical language'
 url='http://www.rust-lang.org/'
 license=('MIT' 'Apache')
 depends=(gcc shared-mime-info)
-makedepends=(libffi perl python2 curl chrpath git)
+makedepends=(libffi perl python2 curl git)
 source=('git://github.com/mozilla/rust.git')
 md5sums=(SKIP)
 install=${pkgname}.install
@@ -24,7 +24,7 @@ pkgver() {
 build() {
   cd rust
 
-  ./configure --prefix=/usr --disable-docs
+  ./configure --prefix=/usr --disable-docs --disable-rpath
 
   # avoid python makedepend (force fallback to python2)
   sed -i 's/^PYTHONVERSION.*/PYTHONVERSION := 3/' src/llvm/Makefile.rules
@@ -61,9 +61,6 @@ package() {
   install -Dm644 rust-mode.el "$pkgdir/usr/share/emacs/site-lisp/rust-mode.el"
 
   cd "$pkgdir/usr"
-
-  # https://github.com/mozilla/rust/issues/5219
-  chrpath -d bin/* lib/*.so lib/rustlib/*/lib/*.so
 
   cd lib
   ln -sf rustlib/$CARCH-unknown-linux-gnu/lib/* .
