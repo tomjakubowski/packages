@@ -63,5 +63,6 @@ package() {
   cd "$pkgdir/usr"
 
   cd lib
+  rm rustlib/manifest
   ln -sf rustlib/$CARCH-unknown-linux-gnu/lib/* .
 }
