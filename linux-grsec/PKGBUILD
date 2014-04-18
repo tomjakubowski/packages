@@ -20,6 +20,7 @@ options=('!strip')
 source=("https://www.kernel.org/pub/linux/kernel/v3.x/${_srcname}.tar.xz"
         "https://www.kernel.org/pub/linux/kernel/v3.x/patch-${_pkgver}.xz"
         "https://grsecurity.net/test/$_grsec_patch"
+        "https://grsecurity.net/test/${_grsec_patch}.sig"
         # the main kernel config files
         'config' 'config.x86_64'
         # standard config files for mkinitcpio ramdisk
@@ -30,6 +31,7 @@ source=("https://www.kernel.org/pub/linux/kernel/v3.x/${_srcname}.tar.xz"
 md5sums=('0ecbaf65c00374eb4a826c2f9f37606f'
          'dcf42b5013a7831d02168fd3eda5cce2'
          '1bb6964ce7cf2ba5995d90c41b937beb'
+         'SKIP'
          '87ff93c49756a100fd8d3284f28dd887'
          '4c4478442c2f7b5591487bec3637bbfe'
          '2f4e8da2611ce693f5f77806a0ffb858'
