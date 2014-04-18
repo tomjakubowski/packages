@@ -30,11 +30,11 @@ source=("https://www.kernel.org/pub/linux/kernel/v3.x/${_srcname}.tar.xz"
 md5sums=('0ecbaf65c00374eb4a826c2f9f37606f'
          'dcf42b5013a7831d02168fd3eda5cce2'
          '1bb6964ce7cf2ba5995d90c41b937beb'
-         '2e69a233ac6307b08e1c181e56c3b931'
-         '7ada2a031a55d4e6b8b0ae185412c680'
+         'e3670602fca40d03e57b02f10cb8c033'
+         '0e97fa53159870ccce33aa2906fd618f'
          '2f4e8da2611ce693f5f77806a0ffb858'
          '98beb36f9b8cf16e58de2483ea9985e3'
-         '0db7629711f4ed76bd1f9da9f97bc4ea')
+         '011b1fd73108547e60d764cdcdbd32ed')
 
 _kernelname=${pkgbase#linux}
 
