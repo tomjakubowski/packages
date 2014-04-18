@@ -34,7 +34,7 @@ md5sums=('0ecbaf65c00374eb4a826c2f9f37606f'
          '790f26211346127432b51aaa4dacb935'
          '2f4e8da2611ce693f5f77806a0ffb858'
          '98beb36f9b8cf16e58de2483ea9985e3'
-         '87440f4d2103a6a5431bcd62005e3fed')
+         'f19c91d10829c8d104eda8144efa798d')
 
 _kernelname=${pkgbase#linux}
 
