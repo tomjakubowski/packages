@@ -29,7 +29,6 @@ _add_socket_deny_groups() {
 }
 
 _add_groups() {
-  _add_proc_group
   _add_tpe_group
   _add_socket_deny_groups
 }
