@@ -11,7 +11,7 @@ _grsecver=3.0
 _timestamp=201404171930
 _grsec_patch="grsecurity-$_grsecver-$_pkgver-$_timestamp.patch"
 pkgver=$_pkgver.$_timestamp
-pkgrel=1
+pkgrel=2
 arch=('i686' 'x86_64')
 url='https://github.com/nning/linux-grsec'
 license=('GPL2')
@@ -30,8 +30,8 @@ source=("https://www.kernel.org/pub/linux/kernel/v3.x/${_srcname}.tar.xz"
 md5sums=('0ecbaf65c00374eb4a826c2f9f37606f'
          'dcf42b5013a7831d02168fd3eda5cce2'
          '1bb6964ce7cf2ba5995d90c41b937beb'
-         'dab8b95b59d28bbb6736f701b653bfdc'
-         '790f26211346127432b51aaa4dacb935'
+         '3a9f881be1606ed267a4f2a58e7b8385'
+         '0debc5b69b7601efc74c012bcd9c7036'
          '2f4e8da2611ce693f5f77806a0ffb858'
          '98beb36f9b8cf16e58de2483ea9985e3'
          'f19c91d10829c8d104eda8144efa798d')
