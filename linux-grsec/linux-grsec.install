@@ -4,31 +4,34 @@
 KERNEL_NAME=-grsec
 KERNEL_VERSION=3.13.10-1-grsec
 
-_add_tpe_group() {
-  if getent group tpe >/dev/null; then
-    groupmod -n tpe tpe-trusted
-  else
-    groupadd -g 9999 -r tpe
-  fi
-}
-
-_add_socket_deny_groups() {
-  if ! getent group socket-deny-server >/dev/null; then
-    groupadd -g 9997 -r socket-deny-server
-  fi
-
-  if ! getent group socket-deny-client >/dev/null; then
-    groupadd -g 9996 -r socket-deny-client
-  fi
-
-  if ! getent group socket-deny-all >/dev/null; then
-    groupadd -g 9995 -r socket-deny-all
-  fi
-}
-
 _add_groups() {
-  _add_tpe_group
-  _add_socket_deny_groups
+  if getent group tpe >/dev/null; then
+    groupmod -g 200 -n tpe tpe-trusted
+  else
+    groupadd -g 200 -r tpe
+  fi
+
+  if ! getent group audit >/dev/null; then
+    groupadd -g 201 -r audit
+  fi
+
+  if getent group socket-deny-all >/dev/null; then
+    groupmod -g 202 socket-deny-all
+  else
+    groupadd -g 202 -r socket-deny-all
+  fi
+
+  if getent group socket-deny-client >/dev/null; then
+    groupmod -g 203 socket-deny-client
+  else
+    groupadd -g 203 -r socket-deny-client
+  fi
+
+  if getent group socket-deny-server >/dev/null; then
+    groupmod -g 204 socket-deny-server
+  else
+    groupadd -g 204 -r socket-deny-server
+  fi
 }
 
 _remove_groups() {

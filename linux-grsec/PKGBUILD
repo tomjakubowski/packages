@@ -11,7 +11,7 @@ _grsecver=3.0
 _timestamp=201404171930
 _grsec_patch="grsecurity-$_grsecver-$_pkgver-$_timestamp.patch"
 pkgver=$_pkgver.$_timestamp
-pkgrel=2
+pkgrel=3
 arch=('i686' 'x86_64')
 url=https://grsecurity.net/
 license=('GPL2')
@@ -32,11 +32,11 @@ md5sums=('0ecbaf65c00374eb4a826c2f9f37606f'
          'dcf42b5013a7831d02168fd3eda5cce2'
          '1bb6964ce7cf2ba5995d90c41b937beb'
          'SKIP'
-         '87ff93c49756a100fd8d3284f28dd887'
-         '4c4478442c2f7b5591487bec3637bbfe'
+         '76a3fab6a763a05330804266307390d5'
+         '1afd35c3f6133ae86c46df8a5b205f63'
          '2f4e8da2611ce693f5f77806a0ffb858'
          '98beb36f9b8cf16e58de2483ea9985e3'
-         '29230fd122c1b19ea49a0b65f38db3d3')
+         '7a052645280da78a98bfe8cf805ddab5')
 
 _kernelname=${pkgbase#linux}
 
