@@ -5,10 +5,10 @@
 # Contributor: Thomas Dwyer http://tomd.tel
 
 pkgbase=linux-grsec
-_srcname=linux-3.13
-_pkgver=3.13.10
+_srcname=linux-3.14
+_pkgver=3.14.1
 _grsecver=3.0
-_timestamp=201404182111
+_timestamp=201404201132
 _grsec_patch="grsecurity-$_grsecver-$_pkgver-$_timestamp.patch"
 pkgver=$_pkgver.$_timestamp
 pkgrel=1
@@ -26,16 +26,32 @@ source=("https://www.kernel.org/pub/linux/kernel/v3.x/${_srcname}.tar.xz"
         # standard config files for mkinitcpio ramdisk
         'linux.preset'
         'change-default-console-loglevel.patch'
+        '0001-Bluetooth-allocate-static-minor-for-vhci.patch'
+        '0002-module-allow-multiple-calls-to-MODULE_DEVICE_TABLE-p.patch'
+        '0003-module-remove-MODULE_GENERIC_TABLE.patch'
+        '0004-fs-Don-t-return-0-from-get_anon_bdev.patch'
+        '0005-Revert-Bluetooth-Enable-autosuspend-for-Intel-Blueto.patch'
+        '0006-genksyms-fix-typeof-handling.patch'
+        '0007-x86-efi-Correct-EFI-boot-stub-use-of-code32_start.patch'
+        '0010-iwlwifi-mvm-delay-enabling-smart-FIFO-until-after-be.patch'
         sysctl.conf
         )
-md5sums=('0ecbaf65c00374eb4a826c2f9f37606f'
-         'dcf42b5013a7831d02168fd3eda5cce2'
-         '5ac424b16fc8c2cef250b45d2f7514c6'
+md5sums=('b621207b3f6ecbb67db18b13258f8ea8'
+         '2526eb95793ecc1c22d7e1428ef23cdc'
+         'db16c597af55a82da6fbe1059377c5cd'
          'SKIP'
-         '76a3fab6a763a05330804266307390d5'
-         '1afd35c3f6133ae86c46df8a5b205f63'
+         '0b500c543d55a23a05e9fb0c1c8b3af3'
+         '34a568e8b02a9c4cdece5ae7e890cdbc'
          '2f4e8da2611ce693f5f77806a0ffb858'
          '98beb36f9b8cf16e58de2483ea9985e3'
+         '6839ddec74a5300beff1709a81b0e4f3'
+         '706549e8a05f33f7fc697f28c0ca71d2'
+         'd23fc66be93ebce698bd7da844789de1'
+         'b240cc8ebb4b5d74e94b4c72d033f726'
+         'a89d593774ccb955eb8368d3bc87ce26'
+         '16a161979f846b049e90daea907c35dd'
+         '00727251b0d337a25d3ca392218afdf4'
+         '353b553d69da810ef954618aca60e1e2'
          '7a052645280da78a98bfe8cf805ddab5')
 
 _kernelname=${pkgbase#linux}
@@ -53,6 +69,35 @@ prepare() {
   # remove this when a Kconfig knob is made available by upstream
   # (relevant patch sent upstream: https://lkml.org/lkml/2011/7/26/227)
   patch -p1 -i "${srcdir}/change-default-console-loglevel.patch"
+
+  # Fix vhci warning in kmod (to restore every kernel maintainer's sanity)
+  patch -p1 -i "${srcdir}/0001-Bluetooth-allocate-static-minor-for-vhci.patch"
+
+  # Fix atkbd aliases
+  patch -p1 -i "${srcdir}/0002-module-allow-multiple-calls-to-MODULE_DEVICE_TABLE-p.patch"
+  patch -p1 -i "${srcdir}/0003-module-remove-MODULE_GENERIC_TABLE.patch"
+
+  # Fix various bugs caused by rootfs having FSID 0
+  # See http://www.spinics.net/lists/kernel/msg1716924.html
+  patch -p1 -i "${srcdir}/0004-fs-Don-t-return-0-from-get_anon_bdev.patch"
+
+  # Disable usb autosuspend for intel btusb
+  # See http://www.spinics.net/lists/kernel/msg1716461.html
+  # Until a solution is found, make sure the driver leaves autosuspend alone
+  patch -p1 -i "${srcdir}/0005-Revert-Bluetooth-Enable-autosuspend-for-Intel-Blueto.patch"
+
+  # Fix generation of symbol CRCs
+  # http://git.kernel.org/cgit/linux/kernel/git/torvalds/linux.git/commit/?id=dc53324060f324e8af6867f57bf4891c13c6ef18
+  patch -p1 -i "${srcdir}/0006-genksyms-fix-typeof-handling.patch"
+
+  # Fix the use of code32_start in the EFI boot stub
+  # http://permalink.gmane.org/gmane.linux.kernel/1679881
+  # https://git.kernel.org/cgit/linux/kernel/git/mfleming/efi.git/commit/?h=urgent&id=7e8213c1f3acc064aef37813a39f13cbfe7c3ce7
+  patch -p1 -i "${srcdir}/0007-x86-efi-Correct-EFI-boot-stub-use-of-code32_start.patch"
+
+  # https://git.kernel.org/cgit/linux/kernel/git/iwlwifi/iwlwifi-fixes.git/commit/?id=12f853a89e29f50b17698e17e73c328a35f1498d
+  # FS#39815
+  patch -p1 -i "${srcdir}/0010-iwlwifi-mvm-delay-enabling-smart-FIFO-until-after-be.patch"
 
   # Add grsecurity patches
   patch -Np1 -i "$srcdir/$_grsec_patch"
@@ -207,25 +252,6 @@ _package-headers() {
   fi
 
   cp arch/${KARCH}/kernel/asm-offsets.s "${pkgdir}/usr/lib/modules/${_kernver}/build/arch/${KARCH}/kernel/"
-
-  # add headers for lirc package
-  # pci
-  for i in bt8xx cx88 saa7134; do
-    mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/pci/${i}"
-    cp -a drivers/media/pci/${i}/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/pci/${i}"
-  done
-  # usb
-  for i in cpia2 em28xx pwc sn9c102; do
-    mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/usb/${i}"
-    cp -a drivers/media/usb/${i}/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/usb/${i}"
-  done
-  # i2c
-  mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/i2c"
-  cp drivers/media/i2c/*.h  "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/i2c/"
-  for i in cx25840; do
-    mkdir -p "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/i2c/${i}"
-    cp -a drivers/media/i2c/${i}/*.h "${pkgdir}/usr/lib/modules/${_kernver}/build/drivers/media/i2c/${i}"
-  done
 
   # add docbook makefile
   install -D -m644 Documentation/DocBook/Makefile \
