@@ -2,7 +2,7 @@
 # Contributor: Gordin <9ordin @t gmail dot com>
 pkgname=android-sdk
 pkgver=r23
-pkgrel=1
+pkgrel=2
 pkgdesc='Google Android SDK'
 arch=('i686' 'x86_64')
 url="http://developer.android.com/sdk/index.html"
@@ -53,4 +53,5 @@ package() {
 
   # Fix broken permissions
   chmod -R o=g opt/$pkgname
+  find opt/$pkgname -perm 744 -exec chmod 755 {} +
 }
