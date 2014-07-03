@@ -1,6 +1,6 @@
 # Maintainer: Daniel Micay <danielmicay@gmail.com>
 pkgname=vim-iptables
-pkgver=1.08
+pkgver=1.09
 pkgrel=1
 _scriptid=15041
 pkgdesc="iptables-save/restore syntax highlighter"
