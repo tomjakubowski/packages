@@ -1,0 +1,32 @@
+# Maintainer: Daniel Micay <danielmicay@gmail.com>
+_pkgname=cargo
+pkgname=cargo-git
+pkgver=r663.5a4247e
+pkgrel=1
+pkgdesc='Rust package manager'
+arch=('i686' 'x86_64')
+url="http://crates.io/"
+license=('MIT' 'Apache')
+makedepends=('python')
+depends=('git' 'rust-git')
+provides=('cargo')
+conflicts=('cargo')
+source=('git://github.com/rust-lang/cargo.git')
+md5sums=('SKIP')
+
+pkgver() {
+  cd cargo
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd cargo
+  ./configure --prefix=/usr
+  make
+}
+
+package() {
+  cd cargo
+  make DESTDIR="$pkgdir/" install
+  install -D -m 644 LICENSE-MIT "$pkgdir/usr/share/licenses/$pkgname/LICENSE-MIT"
+}
