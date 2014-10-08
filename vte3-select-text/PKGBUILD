@@ -3,12 +3,12 @@
 
 pkgname=vte3-select-text
 pkgver=0.38.0
-pkgrel=3
+pkgrel=4
 pkgdesc="Virtual Terminal Emulator widget for use with GTK3"
 arch=('i686' 'x86_64')
 license=('LGPL')
 options=('!libtool' '!emptydirs')
-depends=('gtk3')
+depends=('gtk3' 'vte-common')
 makedepends=('intltool' 'gobject-introspection' 'gtk3' 'python2' 'vala')
 url="http://www.gnome.org"
 source=(http://download.gnome.org/sources/vte/${pkgver::4}/vte-$pkgver.tar.xz
