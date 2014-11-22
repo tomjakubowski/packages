@@ -21,7 +21,8 @@ pkgver() {
 
 build() {
   cd cargo
-  ./configure --prefix=/usr
+  ./.travis.install.deps.sh
+  ./configure --local-rust-root=$(pwd)/rustc --prefix=/usr
   make
 }
 
